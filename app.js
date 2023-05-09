@@ -28,7 +28,7 @@ async function getGenres(){
     for (let i = 0; i < data.categories.items.length; i++) {
         console.log(data.categories.items[i].name);
     }
-     
+    console.log(data);
     return data.categories.items;
 }
 
