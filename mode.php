@@ -10,7 +10,7 @@
 <h1>mode.php</h1>
 <a href="index.php" target="_self">home</a>
 <p> choose mood:</p>
-<form action="match.php" method="get">
+<form action="start.php" method="get">
 
     <input type="radio" id="speed-up" name="mode" value="speed-up">
     <label for="speed-up">Speed Up</label><br>
@@ -22,7 +22,7 @@
     <label for="just-a-sec">just-a-sec</label><br>
 
     <input type="hidden" id="mood" name="mood" value=<?php print_r($_GET['mood']) ?>>
-
+    <input type="hidden" id="song" name="song" value="0" >
     <input type="submit" value="Submit">
 </form>
 
