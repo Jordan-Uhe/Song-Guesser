@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+button {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+  }
+.container{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #153677, #4e085f);
+    padding: 10px;
+}
+.song-guessr{
+    width: 320px;
+    height: 568px;
+    background: #fff;
+    margin: 50px auto 20px;
+    padding: 40px 30px 70px;
+    border-radius: 10px;
+}
+.status-bar img{
+    width: 320px;
+    position: absolute;
+    top:60px;
+    left:550px;
+}
+.logo img{
+    width: 235px;
+    margin: 15px;
+    position: absolute;
+    top:140px;
+}
+.start{
+    background-color:#94f78c;
+    height:86px;
+    width:282px;
+    border-radius:10px;
+    border-style:solid;
+    left:569px;
+    top:400px;
+    position:absolute;
+    text-align:center;
+    display: inline-block;
+    font-size:30px;
+    cursor: pointer;
+}
+
+/*MoodPage*/
+.navigation-bar{
+    display: flex;
+    align-items: center;
+    position:absolute;
+    top:545px;
+    left: 550px;
+}
+.mood1{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 125px;
+    left: 470px;
+    margin: 100px;
+}
+.mood2{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 280px;
+    left: 470px;
+    margin: 100px;
+}
+.previous{
+    display: flex;
+    position:absolute;
+    top:103px;
+    left: 550px;
+}
+
+/*Playing*/
+.playing{
+    position:relative;
+    right: 20px;
+}
+.score{
+    position:relative;
+    bottom: 90px;
+}
+.buzzer{
+    position:relative;
+    bottom: 350px;
+    left: 50px;
+}

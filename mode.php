@@ -10,7 +10,7 @@
 <h1>mode.php</h1>
 <a href="index.php" target="_self">home</a>
 <p> choose mood:</p>
-<form action="start.php" method="get">
+<form action="Playing.php" method="get">
 
     <input type="radio" id="speed-up" name="mode" value="speed-up">
     <label for="speed-up">Speed Up</label><br>
