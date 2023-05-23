@@ -75,7 +75,7 @@ if (readCookie("song") >=10 ) {
     <div class="container">
         <div class="song-guessr">
             <div class="playing">
-                <iframe width="300" height="300" id="youtube-frame" frameborder="0"></iframe>
+                <iframe width="0" height="0" id="youtube-frame" frameborder="0"></iframe>
                 <input id="player-input"><br>
                 <p id="result"></p> <br>
             </div>
