@@ -65,22 +65,21 @@ button {
     align-items: center;
     position: absolute;
     top: 125px;
-    left: 470px;
-    margin: 100px;
+    
+    margin-top: 100px;
 }
 .mood2{
     display: flex;
     align-items: center;
     position: absolute;
     top: 280px;
-    left: 470px;
-    margin: 100px;
+    margin-top: 100px;
 }
 .previous{
     display: flex;
     position:absolute;
     top:103px;
-    left: 550px;
+
 }
 
 /*Playing*/
@@ -96,4 +95,11 @@ button {
     position:relative;
     bottom: 350px;
     left: 50px;
+}
+
+.options{
+    display: flex;
+    align-items: center;
+    position: absolute;
+   
 }

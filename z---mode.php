@@ -2,6 +2,7 @@
 <html lang='en'>
 
 <head>
+    <script src='cookie.js' type='text/javascript'></script>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Start</title>
@@ -12,17 +13,14 @@
 <p> choose mood:</p>
 <form action="Playing.php" method="get">
 
-    <input type="radio" id="speed-up" name="mode" value="speed-up">
+    <input type="radio" id="speed-up" name="mode" value="speed-up" onclick='createCookie("mode", "speed-up", 1); createCookie("song", 0, 1)'>
     <label for="speed-up">Speed Up</label><br>
 
-    <input type="radio" id="panic" name="mode" value="panic">
+    <input type="radio" id="panic" name="mode" value="panic" onclick='createCookie("mode", "panic", 1); createCookie("song", 0, 1)'>
     <label for="panic">Panic</label><br>
 
-    <input type="radio" id="just-a-sec" name="mode" value="just-a-sec">
+    <input type="radio" id="just-a-sec" name="mode" value="just-a-sec" onclick='createCookie("mode", "just-a-sec", 1); createCookie("song", 0, 1)'>
     <label for="just-a-sec">just-a-sec</label><br>
-
-    <input type="hidden" id="mood" name="mood" value=<?php print_r($_GET['mood']) ?>>
-    <input type="hidden" id="song" name="song" value="0" >
     <input type="submit" value="Submit">
 </form>
 
