@@ -44,7 +44,7 @@
                     </button>
                 </a>
                 <a href="playing.php">
-                    <button type="radio" onclick='createCookie("mood", "chill", 1)' >
+                    <button type="radio" onclick='createCookie("mood", "chill", 1); createCookie("song", 0, 1); createCookie("score", 0, 1)' >
                         <img src="image/mood_chill.png" width="130px">
                     </button>
                 </a>
