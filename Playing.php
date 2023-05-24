@@ -10,22 +10,21 @@
     <link rel="stylesheet" href="song.css">
 </head>
 <script>
-    function myFunction() {
+    const musiclist = [<?php
+    //load data file
+    $filename = 'data.json';
+    $myfile = fopen($filename, "r") or die("Unable to open file!");
+    $dataUncleaned = (fread($myfile, filesize($filename)));
+    fclose($myfile);
+    print_r($dataUncleaned);
+    ?>][0];
+
+    console.log(musiclist);
+    function checkAnswer() {
         let x = document.getElementById("player-input").value;
         let text;
-        const musiclist = [
-            ["fUYaosyR4bE", "Lily Allen", "Not Fair"],
-            ["NI6aOFI7hms", "The Cardigans", "Lovefool"],
-            ["ryDOy3AosBw", "Skee-Lo", "I Wish"],
-            ["fPO76Jlnz6c", "Coolio", "Gangsta's Paradise"],
-            ["aSLZFdqwh7E", "Eminem", "Stan"],
-            ["34Na4j8AVgA", "The Weeknd", "Starboy"],
-            ["fnlJw9H0xAM", "NF", "The Search"],
-            ["S9bCLPwzSC0", "Eminem", "Mockingbird"],
-            ["VDvr08sCPOc", "Fort Minor", "Remember The Name"],
-            ["dvgZkm1xWPE", "Coldplay", "Viva La Vida"]
-        ];
-        if (x != musiclist[readCookie("song")][2]) {
+
+        if (x != musiclist[readCookie("mood")][readCookie("song")]["song"]) {
             text = "Wrong";
 
         } else {
@@ -33,37 +32,19 @@
             const attr = document.createAttribute("disabled");
             document.getElementById("player-input").setAttributeNode(attr);
             createCookie("score", readCookie("score") * 1 + 1, 1);
-
-
         }
         document.getElementById("result").innerHTML = text;
-
-
     }
 
     function onLoad() {
         console.log("on load");
 
-if (readCookie("song") >=10 ) {
-    console.log("redirect");
-    location.replace("results.php");
-};
-
-        const musiclist = [
-            ["fUYaosyR4bE", "Lily Allen", "Not Fair"],
-            ["NI6aOFI7hms", "The Cardigans", "Lovefool"],
-            ["ryDOy3AosBw", "Skee-Lo", "I Wish"],
-            ["fPO76Jlnz6c", "Coolio", "Gangsta's Paradise"],
-            ["aSLZFdqwh7E", "Eminem", "Stan"],
-            ["34Na4j8AVgA", "The Weeknd", "Starboy"],
-            ["fnlJw9H0xAM", "NF", "The Search"],
-            ["S9bCLPwzSC0", "Eminem", "Mockingbird"],
-            ["VDvr08sCPOc", "Fort Minor", "Remember The Name"],
-            ["dvgZkm1xWPE", "Coldplay", "Viva La Vida"]
-        ];
+        if (readCookie("song") >= 10) {
+            console.log("redirect");
+            location.replace("results.php");
+        };
         const attr3 = document.createAttribute("src");
-        attr3.value = "https://www.youtube.com/embed/" + musiclist[readCookie("song")][0] +
-            "?autoplay=1&start=5&end=35";
+        attr3.value = "https://www.youtube.com/embed/" + musiclist[readCookie("mood")][readCookie("song")]["link"] + "?autoplay=1&start=" + musiclist[readCookie("mood")][readCookie("song")]["start"] + "&end=" + musiclist[readCookie("mood")][readCookie("song")]["end"];
         const element = document.getElementById("youtube-frame");
         element.setAttributeNode(attr3);
 
@@ -80,7 +61,7 @@ if (readCookie("song") >=10 ) {
                 <p id="result"></p> <br>
             </div>
             <div class="options">
-                <button type="radio" onclick="myFunction()">
+                <button type="radio" onclick="checkAnswer()">
                     <img src="image/check.png" style="width:130px; margin-right:20px;">
                 </button>
                 <a href="playing.php">
@@ -89,11 +70,6 @@ if (readCookie("song") >=10 ) {
                     </button>
                 </a>
             </div>
-
-
-
-
-
         </div>
     </div>
 </body>
