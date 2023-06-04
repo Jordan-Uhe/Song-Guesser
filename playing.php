@@ -21,10 +21,21 @@
 
     console.log(musiclist);
     function checkAnswer() {
-        let x = document.getElementById("player-input").value;
+
+        try {
+            x = document.querySelector('input[name="mcanswer"]:checked').value;
+
+            console.log(x);
+        } catch (error) {
+            console.log("no selected");
+
+        }
+
+        let input = document.getElementById("player-input").value;
+        cleanedinput = (input.replace(/[^a-zA-Z0-9]/g, '')).toLowerCase();
         let text;
 
-        if (x != musiclist[readCookie("mood")][readCookie("song")]["song"]) {
+        if (cleanedinput != musiclist[readCookie("mood")][readCookie("song")]["song"].replace(/[^a-zA-Z0-9]/g, '').toLowerCase()) {
             text = "Wrong";
 
         } else {
@@ -48,20 +59,44 @@
         const element = document.getElementById("youtube-frame");
         element.setAttributeNode(attr3);
 
+        if (readCookie("mode") == "easy") {
+            console.log("easy");
+            document.getElementById("optionshard").innerHTML = '';
+        } else if (readCookie("mode") == "hard") {
+            console.log("hard");
+            document.getElementById("optionseasy").innerHTML = '';
+        } else {
+            console.log("test");
+        }
     }
 </script>
 
 <body>
+
     <a href="index.php" target="_self">home</a>
     <div class="container">
         <div class="song-guessr">
             <div class="playing">
-                <iframe width="0" height="0" id="youtube-frame" frameborder="0"></iframe>
-                <input id="player-input"><br>
-                <p id="result"></p> <br>
+                <iframe width="300" height="30" id="youtube-frame" frameborder="0"></iframe>
             </div>
-            <div class="options">
-                <button type="radio" onclick="checkAnswer()">
+            <p id="result"></p>
+            <div class="optionshard">
+                <input id="player-input"><br>
+            </div>
+
+
+            <div id="optionseasy">
+                <input type="radio" id="option1" name="mcanswer" value="option1">
+                <label for="option1">option1</label><br>
+                <input type="radio" id="option2" name="mcanswer" value="option2">
+                <label for="option2">option2</label><br>
+                <input type="radio" id="option3" name="mcanswer" value="option3">
+                <label for="option3">option3</label><br>
+                <input type="radio" id="option4" name="mcanswer" value="option4">
+                <label for="option4">option4</label><br>
+            </div>
+            <div id="songcontrols">
+                <button type="radio" id="checkanswer" onclick="checkAnswer()">
                     <img src="image/check.png" style="width:130px; margin-right:20px;">
                 </button>
                 <a href="playing.php">
@@ -70,6 +105,7 @@
                     </button>
                 </a>
             </div>
+
         </div>
     </div>
 </body>
