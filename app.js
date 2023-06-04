@@ -56,6 +56,7 @@ function make2DArray(cols, rows) {
   }
 
   function setPlaylistArray(){
+    console.log("test1");
     getPlaylistSong("5GoaIW2n8LmCOfduD1JWll").then(data => {
        songList = make2DArray(2, data.length);
        for (let i = 0; i < data.length; i++) {
@@ -67,7 +68,7 @@ function make2DArray(cols, rows) {
        songList[1][3] = "David Guetta, Anne Marie, Coi Leray - Baby Don't Hurt Me (Lyrics).mp3";
        songList[1][4] = "Oliver Tree & Robin Schulz - Miss You (Lyrics).mp3";
        songList[1][5] = "Jax Jones, Calum Scott - Whistle (Lyrics).mp3";
-
+console.log(songList);
        loadSong();
    }).catch(err => {
        console.log(err);

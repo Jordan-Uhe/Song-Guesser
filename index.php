@@ -31,7 +31,7 @@
                 </a>
             </div>
         </div>
-        <a href="mood.php">
+        <a href="mode.php">
             <button class="start">START</button>
         </a>
     </div>

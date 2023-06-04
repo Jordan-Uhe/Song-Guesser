@@ -97,7 +97,7 @@ button {
     left: 50px;
 }
 
-.options{
+.songcontrols{
     display: flex;
     align-items: center;
     position: absolute;
