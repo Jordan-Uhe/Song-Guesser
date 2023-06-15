@@ -1,219 +1,96 @@
-  
-var clientID = 'e468d1aca81b48269171f4f2a8ba8f7c';
-var clientSecret = '4079f8ca3a034f3dbffdecf8f48d0ecc';
+function setAnswers() {
+    answers = ['', '', '', '']
+    arrayPossible = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    correct_answer_pos = Math.floor(Math.random() * 4);
 
-let songList = [[]];
+    arrayPossible.splice(readCookie("song"), 1);
 
-async function getToken(){
-    var json = await fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type' : 'application/x-www-form-urlencoded', 
-            'Authorization' : 'Basic ' + btoa( clientID + ':' + clientSecret)
-        },
-        body: 'grant_type=client_credentials'
-    });
 
-    var token = await json.json();
-    return token.access_token;
-}
-
-async function getGenres(){
-    let token = await getToken();
-
-    var result = await fetch(`https://api.spotify.com/v1/browse/categories`, {
-        method: 'GET',
-        headers: { 'Authorization' : 'Bearer ' + token}
-    });
-
-    var data = await result.json();
-    for (let i = 0; i < data.categories.items.length; i++) {
-        console.log(data.categories.items[i].name);
-    }
-    const done = data.categories.items;
-    return done;
-}
-
-async function getPlaylistSong(playlistID){
-    let token = await getToken();
-
-    var result = await fetch(`https://api.spotify.com/v1/playlists/`+ playlistID, {
-        method: 'GET',
-        headers: { 'Authorization' : 'Bearer ' + token}
-    });
-
-    var data = await result.json();
-     
-    return data.tracks.items;
-}
-
-function make2DArray(cols, rows) {
-    var arr = new Array(cols);
-    for (var i = 0; i < arr.length; i++) {
-      arr[i] = new Array(rows);
-    }
-    return arr;
-  }
-
-  function setPlaylistArray(){
-    console.log("test1");
-    getPlaylistSong("5GoaIW2n8LmCOfduD1JWll").then(data => {
-       songList = make2DArray(2, data.length);
-       for (let i = 0; i < data.length; i++) {
-           songList[0][i] = data[i].track;
-       }
-       songList[1][0] = "Tiësto - 10_35 (Lyrics) ft. Tate McRae.mp3";
-       songList[1][1] = "David Guetta, Bebe Rexha - I'm good (Blue) LYRICS _I'm good, yeah, I'm feelin' alright_.mp3";
-       songList[1][2] = "Black Eyed Peas, Shakira, David Guetta - DON'T YOU WORRY (Lyrics).mp3";
-       songList[1][3] = "David Guetta, Anne Marie, Coi Leray - Baby Don't Hurt Me (Lyrics).mp3";
-       songList[1][4] = "Oliver Tree & Robin Schulz - Miss You (Lyrics).mp3";
-       songList[1][5] = "Jax Jones, Calum Scott - Whistle (Lyrics).mp3";
-console.log(songList);
-       loadSong();
-   }).catch(err => {
-       console.log(err);
-   });
-  }
-
-  let currentSong;
-
-  function loadSong(){
-    randomSongArray = [" ", " ", " ", " "];
-    let i = 0;
-    while(randomSongArray.includes(" ")){
-        randomSong = songList[0][Math.floor(Math.random()*songList[0].length)];
-        if(!randomSongArray.includes(randomSong)){
-            randomSongArray[i] = randomSong;
-            i++;
+    for (let i = 0; i < 4; i++) {
+        if (i == correct_answer_pos) {
+            answers[i] = musiclist[readCookie("mood")][readCookie("song")]["song"];
+        } else {
+            wrong_index = Math.floor(Math.random() * arrayPossible.length);
+            wrong_answer = arrayPossible[wrong_index];
+            answers[i] = musiclist[readCookie("mood")][wrong_answer]["song"];
+            arrayPossible.splice(wrong_index, 1);
         }
     }
-    document.getElementById("b1").innerHTML=randomSongArray[0].name;
-    document.getElementById("b2").innerHTML=randomSongArray[1].name;
-    document.getElementById("b3").innerHTML=randomSongArray[2].name;
-    document.getElementById("b4").innerHTML=randomSongArray[3].name;
-    let currentSongPath = " ";
-    currentSong = randomSongArray[Math.floor(Math.random() * 4)];
-    for (let index = 0; index < songList[0].length; index++) {
-        if(currentSong == songList[0][index]){
-            currentSongPath = songList[1][index];
+
+    document.getElementById("option1").value = answers[0];
+    document.getElementById("option2").value = answers[1];
+    document.getElementById("option3").value = answers[2];
+    document.getElementById("option4").value = answers[3];
+}
+
+function checkAnswer(mc_input) {
+    if (typeof roundfinished !== 'undefined') {
+        console.log("roundover");
+    } else {
+        let input;
+        let output;
+
+        if (mc_input != false) {
+            try {
+                mc_SelectedAnswer = document.getElementById(mc_input).value;
+                input = mc_SelectedAnswer;
+            } catch (error) {
+                console.log("no selected");
+            }
         }
-    }
-    document.getElementById("player").src = currentSongPath + "#t=00:01:00";
-}
+        else {
+            input = document.getElementById("player-input").value;
+        }
 
-function checkGuess1(){
-    if(document.getElementById("b1").innerHTML==currentSong.name){
-        console.log("Correct");
-    }else{
-        console.log("Incorrect")
-    }
-}
-function checkGuess2(){
-    if(document.getElementById("b2").innerHTML==currentSong.name){
-        console.log("Correct");
-    }else{
-        console.log("Incorrect")
-    }
-}
-function checkGuess3(){
-    if(document.getElementById("b3").innerHTML==currentSong.name){
-        console.log("Correct");
-    }else{
-        console.log("Incorrect")
-    }
-}
-function checkGuess4(){
-    if(document.getElementById("b4").innerHTML==currentSong.name){
-        console.log("Correct");
-    }else{
-        console.log("Incorrect")
+        cleanedinput = (input.replace(/[^a-zA-Z0-9]/g, '')).toLowerCase();
+
+        console.log("input:" + input + " \
+        cleanedinput:" + cleanedinput);
+
+        if ((cleanedinput != musiclist[readCookie("mood")][readCookie("song")]["song"].replace(/[^a-zA-Z0-9]/g, '').toLowerCase()) && (cleanedinput != "a")) {
+            output = "Wrong";
+
+        } else {
+            output = "Correct, Answer Was: " + musiclist[readCookie("mood")][readCookie("song")]["song"];
+            document.getElementById("player-input").setAttributeNode(document.createAttribute("hidden"));
+            document.getElementById("checkAnswer").setAttributeNode(document.createAttribute("hidden"));
+
+            createCookie("score", readCookie("score") * 1 + 1, 1);
+            roundfinished = true;
+            document.getElementById("optionseasy").innerHTML = '';
+
+        }
+
+        document.getElementById("result").innerHTML = output;
     }
 }
 
-// function getPlaylistByGenre(){
-//     var limit = 10;
-    
-//     var result = fetch(`https://api.spotify.com/v1/browse/categories/${genreId}/playlists?limit=${limit}`, {
-//         method: 'GET',
-//         headers: { 'Authorization' : 'Bearer ' + getToken()}
-//     });
+function onLoad() {
+    console.log("on load: ---");
 
-//     var data = result.json();
-//     return data.playlists.items;
-// }
+    if (readCookie("song") >= 10) {
+        console.log("redirect");
+        location.replace("results.php");
+    };
+    const attr = document.createAttribute("src");
+    attr.value = "https://www.youtube.com/embed/" + musiclist[readCookie("mood")][readCookie("song")]["link"] + "?autoplay=1&start=" + musiclist[readCookie("mood")][readCookie("song")]["start"] + "&end=" + musiclist[readCookie("mood")][readCookie("song")]["end"];
+    const element = document.getElementById("youtube-frame");
+    element.setAttributeNode(attr);
 
-// function getTracks(){
-//     var limit = 10;
+    if (readCookie("mode") == "easy") {
+        console.log("mode: easy");
 
-//     var resu2lt = fetch(`${tracksEndPoint}?limit=${limit}`, {
-//         method: 'GET',
-//         headers: { 'Authorization' : 'Bearer ' + getToken()}
-//     });
+        document.getElementById("player-input").setAttributeNode(document.createAttribute("hidden"));
+        document.getElementById("checkAnswer").setAttributeNode(document.createAttribute("hidden"));
 
-//     var data = result.json();
-//     return data.items;
-// }
+        setAnswers();
+    } else if (readCookie("mode") == "hard") {
+        console.log("mode: hard");
+        document.getElementById("optionseasy").innerHTML = '';
 
-// function getTrack(){
-//     var result = fetch(`${trackEndPoint}`, {
-//         method: 'GET',
-//         headers: { 'Authorization' : 'Bearer ' + getToken()}
-//     });
-
-//     var data = result.json();
-//     return data;
-// }
-
-// function addPlaylist(){
-//     var result = fetch(`${https://api.spotify.com/v1/users/{smedjan}/playlists}`, {
-//         method: 'POST',
-//         bpdy: {
-//             "name": "New Playlist",
-//             "description": "New playlist description",
-//             "public": false
-//         }
-//     });
-
-//     var data = result.json();
-//     return data;
-// }
-
-// var addplaylist = function (id,token) {
-
-//     $.ajax({
-//       dataType: 'text',
-//       type: 'post',
-//       url: 'https://api.spotify.com/v1/users/entelperú/playlists/6sU8XOS7BLicR3COsc0Rhp/tracks?uris=spotify:track:'+ id,
-//       headers: {
-//         Authorization: "Bearer "+token,
-//       },success: function (response) {
-//         alert(response);
-//       }
-//   });
-// };
-    
-
-
-function resetTrackDetail() {
-    this.inputField().songDetail.innerHTML = '';
-}
-
-function resetTracks() {
-    this.inputField().tracks.innerHTML = '';
-    this.resetTrackDetail();
-}
-
-function resetPlaylist() {
-    this.inputField().playlist.innerHTML = '';
-    this.resetTracks();
-}
-
-function storeToken(value) {
-    document.querySelector(DOMElements.hfToken).value = value;
-}
-
-function getStoredToken() {
-    return {
-        token: document.querySelector(DOMElements.hfToken).value
+    } else {
+        console.log("mode: test");
+        setAnswers();
     }
+    console.log("---end of on load");
 }

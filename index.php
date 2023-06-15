@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song Guessr</title>
-    <link rel="stylesheet" href="song.css">
+    <link rel="stylesheet" href="new.css">
 </head>
 
 <body>
@@ -15,6 +15,12 @@
         <div class="song-guessr">
             <div class="logo">
                 <img src="image/logo.png">
+            </div>
+
+            <div class="start">
+                <a href="mode.php">
+                    <button class="start-button">START</button>
+                </a>
             </div>
             <div class="navigation-bar">
                 <img src="image/main.png" alt="main" width="80px">
@@ -31,22 +37,20 @@
                 </a>
             </div>
         </div>
-        <a href="mode.php">
-            <button class="start">START</button>
-        </a>
+
     </div>
 
 </body>
-<section>
-    <aside id="debug">
-        <hr>
-        <h3>Debug Area</h3>
-        <pre>
+
+<aside id="debug">
+    <hr>
+    <h3>Debug Area</h3>
+    <pre>
         COOKIE Contains:
 <?php print_r($_COOKIE) ?>
 
   </pre>
-    </aside>
-</section>
+</aside>
+
 
 </html>

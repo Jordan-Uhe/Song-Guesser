@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+button {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #153677, #4e085f);
+    padding: 10px;
+}
+
+.song-guessr {
+    width: 320px;
+    height: 568px;
+    background: #fff;
+    margin: 50px auto 20px;
+    border-radius: 10px;
+}
+
+
+.logo {
+    width: inherit;
+    padding-top: 40px;
+}
+
+
+.logo img {
+    width: 235px;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.start-button {
+    background-color: #94f78c;
+    height: 86px;
+    width: 260px;
+    border-radius: 10px;
+    border-style: solid;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navigation-bar {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 545px;
+    left: auto;
+    width: inherit;
+}
+.navigation-bar img {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+.navigation-bar button {
+    width: 80px;
+}
